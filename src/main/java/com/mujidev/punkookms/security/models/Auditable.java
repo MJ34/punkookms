@@ -5,7 +5,7 @@ import java.util.Date;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import static javax.persistence.TemporalType.TIMESTAMP;
 
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -21,14 +21,14 @@ public abstract class Auditable<U> {
     protected U createdBy;
     
     @CreatedDate
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TIMESTAMP)
     protected Date createdDate;
 
     @LastModifiedBy
     protected U lastModifiedBy;
 
     @LastModifiedDate
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TIMESTAMP)
     protected Date lastModifiedDate;
 
     public U getCreatedBy() {
