@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.mujidev.punkookms.parameters.models.Country;
-
 @Repository
 public interface CountryRepository extends JpaRepository<Country, Integer> {
 
