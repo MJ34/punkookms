@@ -2,8 +2,10 @@ package com.mujidev.punkookms.hr.models;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -24,6 +26,8 @@ public class Employee extends Person {
 	@JoinColumn(name="employeetypeid", insertable=false, updatable=false)
 	private EmployeeType employeeType;
 	private Integer employeetypeid;
+	@Lob
+    @Column(columnDefinition = "MEDIUMBLOB")
 	private String photo;
 	private String username;
 	

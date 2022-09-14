@@ -2,10 +2,12 @@ package com.mujidev.punkookms.hr.models;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
@@ -58,5 +60,7 @@ public class Person {
 	private String phone;
 	private String mobile;
 	private String email;
+	@Lob
+    @Column(columnDefinition = "MEDIUMBLOB")
 	private String photo;
 }

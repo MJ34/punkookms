@@ -3,15 +3,20 @@ package com.mujidev.punkookms.hr.controllers;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -84,23 +89,31 @@ public class EmployeeController {
         return "redirect:/hr/employees";
     }
 
-    @RequestMapping(value = "/employees/uploadPhoto", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    /* @RequestMapping(value = "/employees/uploadPhoto", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Object> uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
-        File newFile = new File("C:\\Users\\MSII\\Documents\\project\\punkookms\\uploads" + file.getOriginalFilename());
+        File newFile = new File("//Users//MSII//Documents//project//punkookms//uploads" + file.getOriginalFilename());
         newFile.createNewFile();
         FileOutputStream fout = new FileOutputStream(newFile);
         fout.write(file.getBytes());
         fout.close();
         return new ResponseEntity<>("File uploaded successfully", HttpStatus.OK);
-    }
+    } */
 
-    @PostMapping("/employees/uploadPhoto2")
+    @PostMapping("/employees/uploadPhoto")
     public String uploadFile2(@RequestParam("file") MultipartFile file, Principal principal)
             throws IllegalStateException, IOException {
-        String baseDirectory = "C:\\Users\\MSII\\Documents\\project\\punkookms\\src\\main\\resources\\static\\img\\photos\\";
+        String baseDirectory = "//Users//MSII//Documents//project//punkookms//src//main//resources//static//img//photos//";
         file.transferTo(new File(baseDirectory + principal.getName() + ".jpg"));
         return "redirect:/employees";
     }
+
+    /* @PostMapping("/employees/uploadPhoto3")
+	public String uploadFile3(@RequestParam("file") MultipartFile file, Principal principal)
+			throws IllegalStateException, IOException {
+		String photosDir = "/Users/MSII/Documents/project/punkookms/src/main/resources/static/img/photos/";
+		file.transferTo(new File(photosDir + principal.getName() + ".jpg"));
+		return "redirect:/employees";
+	} */
 
     @RequestMapping(value = "/employee/profile")
     public String profile(Model model, Principal principal) {
@@ -109,5 +122,4 @@ public class EmployeeController {
         model.addAttribute("employee", employeeService.findByUsername(un));
         return "profile";
     }
-
 }
