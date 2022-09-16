@@ -31,7 +31,7 @@ public class AplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/register", "/resources/**", "/css/**", "/fonts/**", "/img/**", "/js/**").permitAll()
                 .antMatchers("/users/addNew").permitAll()
                 .antMatchers("/parameters/**").hasAnyAuthority("ADMIN")
-                .antMatchers("/hr/**").hasAnyAuthority("ADMIN","HR")
+                .antMatchers("/hr/**").hasAnyAuthority("ADMIN", "HR")
                 .antMatchers("/security/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
@@ -45,7 +45,7 @@ public class AplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/login").permitAll()
                 .and()
                 .exceptionHandling().accessDeniedPage("/accessDenied");
-    } 
+    }
 
     @Autowired
     private UserDetailsService userDetailsService;

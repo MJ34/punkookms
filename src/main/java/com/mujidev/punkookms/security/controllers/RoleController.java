@@ -65,4 +65,5 @@ public class RoleController {
         roleService.unassignUserRole(userId, roleId);
         return "redirect:/security/user/Edit/" + userId;
     }
+    
 }

@@ -44,12 +44,12 @@ public class ClientController {
     }
 
     // The op parameter is either Edit or Details
-    @GetMapping("/parameters/client/{op}/{id}")
-    public String editClient(@PathVariable Integer id, @PathVariable String op, Model model) {
+    @GetMapping("/parameters/client/Edit/{id}")
+    public String editClient(@PathVariable("id") Long id, Model model) {
         Client client = clientService.findById(id);
         model.addAttribute("client", client);
         addModelAttributes(model);
-        return "/parameters/client" + op; // returns clientEdit or clientDetails
+        return "/parameters/clientEdit"; // returns clientEdit or clientDetails
     }
 
     @PostMapping("/parameters/clients")
@@ -59,7 +59,7 @@ public class ClientController {
     }
 
     @RequestMapping(value = "/parameters/clients/delete/{id}", method = { RequestMethod.DELETE, RequestMethod.GET })
-    public String deleteById(@PathVariable Integer id) {
+    public String deleteById(@PathVariable Long id) {
         clientService.deleteById(id);
         return "redirect:/parameters/clients";
     }

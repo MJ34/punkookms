@@ -1,12 +1,15 @@
-package com.mujidev.punkookms.parameters.models;
+package com.mujidev.punkookms.hr.models;
+
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.Lob;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -20,30 +23,30 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Client {
-    
+public class JobPost {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private Long id;
-	
-	private String name;
-	private String address;
-	private String city;
-	private String phone;
-	private String mobile;
-	private String website;
-	private String email;
-	
-	@ManyToOne
-	@JoinColumn(name="countryid", insertable=false, updatable=false)
-	private Country country;
-	private Integer countryid;
-	
-	@ManyToOne
-	@JoinColumn(name="stateid", insertable=false, updatable=false)
-	private State state;
-	private Integer stateid;
-	
-	private String details;
+    
+    private String title;
+
+    @Lob
+    private String jobDetail;
+    private String location;
+    private Integer vacancy;
+    private String gender;
+
+    @Lob
+    @Column(columnDefinition = "MEDIUMBLOB")
+    private String banner;
+    
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date postDate;
+    
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date expiredDate;
+
+    private boolean isActivated;
 }

@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.mujidev.punkookms.parameters.models.Client;
 
 @Repository
-public interface ClientRepository extends JpaRepository<Client, Integer> {
+public interface ClientRepository extends JpaRepository<Client, Long> {
     
 }
